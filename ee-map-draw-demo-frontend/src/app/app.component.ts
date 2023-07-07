@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AssetService } from './services/asset.service';
 
 @Component({
   selector: 'app-root',
@@ -6,8 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ee-map-draw-demo-frontend';
+  title = 'frontend';
+
+  constructor(private assetService: AssetService) {
+  }
 
   addNewAsset() {
+    this.assetService.DrawNewAsset.emit()
   }
 }

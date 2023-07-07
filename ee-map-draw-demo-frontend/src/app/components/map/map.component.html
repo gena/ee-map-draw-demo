@@ -1,1 +1,7 @@
-<p>map works!</p>
+<div *ngIf="apiLoaded | async">
+  <google-map width="100%" height="85vh" [options]="options">
+      <!-- <button (click)="onAdd()">Add</button> -->
+
+      <div *ngIf="isZoomWarningVisible" class="zoom-warning">Zoom in at least to level 9 to see satellite imagery, current zoom level is: {{ currentZoom }}</div>
+  </google-map>
+</div>

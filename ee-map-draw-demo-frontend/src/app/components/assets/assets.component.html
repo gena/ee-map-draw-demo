@@ -1,1 +1,93 @@
-<p>assets works!</p>
+<form>
+  <table mat-table [dataSource]="assets" class="mat-elevation-z8 assets">
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Id Column -->
+      <!--
+      <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> Id </th>
+              <td mat-cell *matCellDef="let asset" [ngClass]="{ 'isedited': asset.isEdited === true }"> {{asset.id}} </td>
+      </ng-container>
+      -->
+
+      <!-- Type Column -->
+      <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef> Type </th>
+              <td mat-cell *matCellDef="let asset" [ngClass]="{ 'isedited': asset.isEdited === true }">
+                  <div *ngIf="!asset.isEdited">
+                      {{asset.type}}
+                  </div>
+                  <div *ngIf="asset.isEdited">
+                      <mat-select [(value)]="assetType" (selectionChange)="onAssetTypeChanged(asset)">
+                          <mat-option *ngFor="let type of assetTypes" [value]="type">
+                          {{type}}
+                          </mat-option>
+                      </mat-select>
+                  </div>
+              </td>
+      </ng-container>
+
+      <!-- Commodity Column -->
+      <ng-container matColumnDef="commodity">
+              <th mat-header-cell *matHeaderCellDef> Commodity </th>
+              <td mat-cell *matCellDef="let asset" [ngClass]="{ 'isedited': asset.isEdited === true }">
+                  <div *ngIf="!asset.isEdited">
+                      {{asset.commodity}}
+                  </div>
+                  <div *ngIf="asset.isEdited">
+                      <mat-select [(value)]="assetCommodity">
+                          <mat-option *ngFor="let type of commodityTypes" [value]="type">
+                          {{type}}
+                          </mat-option>
+                      </mat-select>
+                  </div>
+              </td>
+      </ng-container>
+
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Date Acquired </th>
+          <td mat-cell *matCellDef="let asset" [ngClass]="{ 'isedited': asset.isEdited === true }">
+              <div *ngIf="!asset.isEdited">
+                  {{asset.date}}
+              </div>
+              <div *ngIf="asset.isEdited">
+                  <mat-form-field appearance="fill">
+                      <input matInput [formControl]="formDate" [matDatepicker]="dp1" (dateInput)="addEvent('input', $event)" (dateChange)="addEvent('change', $event)">
+                      <mat-datepicker-toggle matIconSuffix [for]="dp1"></mat-datepicker-toggle>
+                      <mat-datepicker #dp1></mat-datepicker>
+                    </mat-form-field>
+              </div>
+          </td>
+      </ng-container>
+
+      <!-- Note Column -->
+      <!-- <ng-container matColumnDef="note">
+          <th mat-header-cell *matHeaderCellDef> Note </th>
+          <td mat-cell *matCellDef="let asset"> {{asset.note}} </td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="isEdited">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let asset" [ngClass]="{ 'isedited': asset.isEdited === true }">
+                  <div *ngIf="!asset.isEdited">
+                      <fa-icon (click)="onEdit(asset)" [icon]="faPenToSquare" [ngClass]="{ 'button-hover': true }"></fa-icon>&nbsp;
+                      <fa-icon (click)="onDelete(asset)" [icon]="faTrash" [ngClass]="{ 'button-hover': true }"></fa-icon>
+                  </div>
+                  <div *ngIf="asset.isEdited">
+                      <fa-icon (click)="onSubmitEdits(asset)" [icon]="faCheck"></fa-icon>&nbsp;
+                      <fa-icon (click)="onDiscardEdits(asset)" [icon]="faTimes"></fa-icon>&nbsp;
+                      <fa-icon (click)="onDelete(asset)" [icon]="faTrash"></fa-icon>
+                  </div>
+              </td>
+  </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</form>
+
+<button #btn (click)="toggleCurrent()" hidden></button>
+
