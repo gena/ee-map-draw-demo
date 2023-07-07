@@ -1,0 +1,48 @@
+table {
+  width: 100%;
+}
+
+.button-hover {
+  visibility: hidden;
+}
+
+.mat-mdc-row:hover > * {
+  background-color: #e5e5e5;
+
+  .button-hover {
+      visibility: visible;
+  }
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 150px;
+}
+
+.mat-mdc-form-field-infix {
+  min-height: 40px;
+}
+
+mat-mdc-text-field-wrapper {
+  padding-left: 0px;
+}
+
+mat-form-field {
+  width: 70px;
+}
+
+form-field-type {
+  width: 170px;
+}
+
+.isedited {
+  background-color: #eee;
+}
+
+.mat-mdc-select {
+  font-size: 14px;
+}
+
+.mat-mdc-option {
+  font-size: 14px;
+}
