@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "run-build": "gcloud builds submit --tag gcr.io/ee-map-draw-demo/ee-map-draw-demo-frontend",
+    "run-deploy": "gcloud run deploy --allow-unauthenticated  --region us-central1  --image gcr.io/ee-map-draw-demo/ee-map-draw-demo-frontend --port 8080 ee-map-draw-demo-frontend"
   },
   "private": true,
   "dependencies": {
